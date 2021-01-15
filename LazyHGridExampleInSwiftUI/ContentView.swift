@@ -8,9 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    let data = (0...1000).map { "Result \($0)" }
+    let rows = [GridItem(.adaptive(minimum: 50))]
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        GeometryReader { geometry in
+            ScrollView(.horizontal) {
+                LazyHGrid(rows: rows) {
+                    ForEach(data, id: \.self) { item in
+                        Text(item)
+                            .font(.title)
+                            .foregroundColor(.blue)
+                    }
+                }
+            }
+        }
     }
 }
 
